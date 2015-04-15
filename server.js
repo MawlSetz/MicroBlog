@@ -2,6 +2,7 @@
 
 var express = require('express')
 var app = express();
+var nodemon = nodemon();
 
 var ejs = require('ejs')
 app.set('view engine', 'ejs')
@@ -68,7 +69,25 @@ app.get('/post/:id/edit', function(req, res){
 	});
 });
 
+//update a post
+app.put('/post/:id', function(req, res){
+	//make changes to certain post 
+	db.run("UPDATE daapPosts SET name = ?, year = ?, semester = ?, city = ?, roommate = ?, contact = ?", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.roommate, req.body.contact, function(err){
+		if (err) throw err;
+		rs.redirect('/post/' + parseInt(req.params.id))
+	});
+});
 
+app.delete('/post/:id', function(req, res){
+	db.run("DELETE FROM daapPosts WHERE id = ?", req.params.id,
+		function(err){
+			if (err) throw err;
+			res.redirect('/posts')
+		});
+});
+
+app.listen('3000');
+console.log('listening on port 3000');
 
 
 
