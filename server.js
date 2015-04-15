@@ -17,7 +17,8 @@ var db = new sqlite3.Database('daapPosts.db');
 
 var request = require('request')
 
-
+//ROUTES
+//redirect
 app.get('/', function(req, res){
 	res.redirect('/posts')
 });
@@ -33,6 +34,15 @@ app.get('/posts', function(req, res){
 	});
 });
 
+//show individual post
+app.get('/post:id', function(req, res){
+	var id = req.params.id;
+	db.get('SELECT * FROM daapPosts WHERE id = ?', id, function(err, data){
+		var post_row = data;
+		console.log(post_row)
+		res.render('show.ejs', {thisPost: data})
+	});
+});
 
 
 
@@ -44,5 +54,3 @@ app.get('/posts', function(req, res){
 
 
 
-
-//ROUTES
