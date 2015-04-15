@@ -44,6 +44,30 @@ app.get('/post:id', function(req, res){
 	});
 });
 
+//server up new page to create a new post
+app.get('/posts/new', function(req, res){
+	res.render('new.ejs')
+});
+//create new post
+app.post('/posts', function(req, res){
+	console.log(req.body)
+	db.run("INSERT INTO daapPosts(name, year, semester, city, roommate, contact) VALUES (?,?,?,?,?,?)", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.roommate, req.body.contact, function(err){
+		if (err) throw err;
+		res.redirect('/posts');
+	});
+});
+
+//sending user to 'edit/update a post' page
+app.get('/post/:id/edit', function(req, res){
+	var id = req.params.id;
+	db.get('SELECT * FROM daapPosts WHERE id = ?', id function(err, data){
+		var post_row = data;
+		console.log(post_row);
+		res.render('edit.ejs', {thisPost: data})
+		return
+	});
+});
+
 
 
 
