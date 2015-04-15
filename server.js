@@ -19,9 +19,10 @@ var db = new sqlite3.Database('daapPosts.db');
 var request = require('request')
 
 //ROUTES
-//redirect
+//"authentication" page
 app.get('/', function(req, res){
-	res.redirect('/posts')
+	//this is incorrect: needs to be username and password page sans real authentication
+	res.render('authentication.ejs', {data: data})
 });
 //show all posts
 app.get('/posts', function(req, res){
@@ -52,7 +53,7 @@ app.get('/posts/new', function(req, res){
 //create new post
 app.post('/posts', function(req, res){
 	console.log(req.body)
-	db.run("INSERT INTO daapPosts(name, year, semester, city, roommate, contact) VALUES (?,?,?,?,?,?)", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.roommate, req.body.contact, function(err){
+	db.run("INSERT INTO daapPosts(name, year, semester, city, company, roommate, contact) VALUES (?,?,?,?,?,?,?)", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.company, req.body.roommate, req.body.contact, function(err){
 		if (err) throw err;
 		res.redirect('/posts');
 	});
