@@ -1,4 +1,4 @@
-# MicroBlog
+# CO-OP CONNECT
 This app is created to assist DAAP students share information about their co-ops and intended moves
   - username and password page
   - If page views < 1, then user is directeted to their co-op input page
