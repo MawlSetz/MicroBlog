@@ -1,1 +1,12 @@
 <% include partials/head %>
+
+<!-- //this page needs to loop through all of the data and create a feed 
+
+<% movies.forEach(function(obj){ %><li><h3><%= obj.title %></h3></br><p> year released: <%= obj.year %></p></br><p>rating: <%= obj.rating %></p></li> <% } %> -->
+
+<!DOCTYPE html>
+<body>
+	<ul>
+	<% daapPosts.forEach(function(req.body)){ %><li><h4><%= req.body.name %> is headed to <% req.body.city %></h4></li>}
+	</ul>
+</body>	
