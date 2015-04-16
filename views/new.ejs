@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+		<style>
+				body{
+			  width:100%;
+			  margin: auto;
+			}
+			.container {
+			  width:960px;
+			   margin: 0 auto;
+			}
+			.header {
+			   background: #9393A2;
+			   width:100%;
+			   top: 0;
+			   position: fixed;
+			}
+			.logo {
+			  float:left;
+			  font-family: helvetica;
+			  font-size: 15px;
+			}
+			a {
+			  text-decoration: none;
+			    color: #fff;
+			}
+			li {
+			  list-style: none;
+			  float: left;
+			  margin-left: 30px;
+			  padding-top: 10px;
+			}
+			.nav {
+			  float: right;
+
+			}
+			.content {
+				padding-top: 80px;
+				text-align: center;
+				font-size: 20px;
+			}
+			input[type=text] {
+				padding:5px; border:2px solid #ccc; 
+				border-radius: 5px;
+				border-radius: 5px;
+			}
+			input[type=text]:focus {
+				border-color:#333; 
+			}
+
+			input[type=submit] {
+				margin-top:20px;
+				padding:5px 15px; background:#ccc; border:0 none;
+				cursor:pointer;
+				border-radius: 5px;
+				border-radius: 5px; }
+	</style>
+	<title>CC - new co-op </title>
+</head>
+<body>
+	<div class="header">
+		<div class="container">
+			<div class="logo">
+				<h1><a href="#">CO-OP CONNECT</h1>
+			
+			</div>
+			<div class="nav">
+				<ul>
+					<li><a href="#">home</a></li>
+					<li><a href="#">new co-op</a></li>
+					<li><a href="#">update</a></li>
+					<li><a href="#">delete</a></li>
+				</ul>	
+
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<p>New User:</p>
+
+	
+	
+
+
+
+			<form>
+			<form method="GET" action="http://localhost:3000/new">
+
+			<input type="text" name="name" placeholder="name"/><br>
+			<input type="text" name="year" placeholder="grade"/><br>
+			<input type="text" name="semester" placeholder="semester"/><br>
+			<input type="text" name="city" placeholder="co-op city"/><br>
+			<input type="text" name="company" placeholder="company name"/><br>
+			<input type="text" name="roommate" placeholder="name"/><br>
+			  <h4> Are you interested in a roommate? </h4>
+			    <label>Yes</label>
+			    <input type="radio" name="yes" value="yes">
+			    <label>No</label>
+			    <input type="radio" name="no" value="no"> </br>
+			<input type="text" name="contact" placeholder="contact info"/><br>    
+
+			<input type="submit" value="Submit" />
+	</form>
+	</div>
+</body>
+</html>
+
