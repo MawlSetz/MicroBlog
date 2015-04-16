@@ -2,7 +2,7 @@
 
 var express = require('express')
 var app = express();
-var nodemon = nodemon();
+
 
 var ejs = require('ejs')
 app.set('view engine', 'ejs')
@@ -62,7 +62,7 @@ app.post('/posts', function(req, res){
 //sending user to 'edit/update a post' page
 app.get('/post/:id/edit', function(req, res){
 	var id = req.params.id;
-	db.get('SELECT * FROM daapPosts WHERE id = ?', id function(err, data){
+	db.get('SELECT * FROM daapPosts WHERE id = ?', id, function(err, data){
 		var post_row = data;
 		console.log(post_row);
 		res.render('edit.ejs', {thisPost: data})
