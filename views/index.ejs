@@ -1,6 +1,8 @@
-<% include partials/head %>
 
-<!-- //this page needs to loop through all of the data and create a feed 
+
+<!-- 
+
+//this page needs to loop through all of the data and create a feed 
 
 <% movies.forEach(function(obj){ %><li><h3><%= obj.title %></h3></br><p> year released: <%= obj.year %></p></br><p>rating: <%= obj.rating %></p></li> <% } %> -->
 
@@ -8,5 +10,15 @@
 <body>
 	<ul>
 	<% daapPosts.forEach(function(req.body)){ %><li><h4><%= req.body.name %> is headed to <% req.body.city %></h4></li>}
+	<li>
+		<form> 
+			
+			<TEXTAREA name="comment" rows="4" cols="35">Write your comment here...</TEXTAREA><br>
+		</li>
+		<li>
+			<input type="submit">
+		</li>
+		</form>
 	</ul>
-</body>	
+</body>
+</html>	

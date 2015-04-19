@@ -22,17 +22,18 @@ var request = require('request')
 //"authentication" page
 app.get('/', function(req, res){
 	//this is incorrect: needs to be username and password page sans real authentication
-	res.render('authentication.ejs', {data: data})
+	// res.render('authentication.ejs', {data: data})
+	res.redirect('/posts');
 });
 //show all posts
 app.get('/posts', function(req, res){
-	db.all('SELECT * FROM posts', function(err, data){
+	db.all('SELECT * FROM daapPosts', function(err, data){
 		if (err) {
 			console.log(err);
 		} else {
 			var posts = data;
 			console.log(posts)
-		} res.render('index.ejs', {posts: data});
+		} res.render('index.ejs', {posts: data})
 	});
 });
 

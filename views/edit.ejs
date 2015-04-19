@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<h1>You can edit an article below:</h1>
+<form action ="/post/<%= daapPost.id %>?_method=PUT" method="POST">
+
+			<input type="text" name="name" placeholder="name"/><br>
+			<input type="text" name="year" placeholder="grade"/><br>
+			<input type="text" name="semester" placeholder="semester"/><br>
+			<input type="text" name="city" placeholder="co-op city"/><br>
+			<input type="text" name="company" placeholder="company name"/><br>
+			<input type="text" name="roommate" placeholder="name"/><br>
+
+<button>Submit</button>
+</form>
+<a href="/posts">Back to Feed</a>
+</body>
+</html>
+
+
+
+		
