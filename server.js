@@ -10,8 +10,8 @@ app.set('view engine', 'ejs')
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({extended: false}))
 
-var methodOverride = require('method-Override')
-app.use(methodOverride('_method'))
+//var methodOverride = require('method-Override')
+//app.use(methodOverride('_method'))
 
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('daapPosts.db');
@@ -87,7 +87,7 @@ app.delete('/post/:id', function(req, res){
 		});
 });
 
-app.listen('3000');
+app.listen('8080', '104.131.94.36');
 console.log('listening on port 3000');
 
 
