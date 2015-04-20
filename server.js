@@ -3,6 +3,7 @@
 var express = require('express')
 var app = express();
 
+var config = require('./settings')
 
 var ejs = require('ejs')
 app.set('view engine', 'ejs')
@@ -18,6 +19,9 @@ var db = new sqlite3.Database('daapPosts.db');
 
 var request = require('request')
 
+var mandrill = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill(config.mandrill_key);
+
 //ROUTES
 //"authentication" page
 app.get('/', function(req, res){
@@ -25,6 +29,7 @@ app.get('/', function(req, res){
 	// res.render('authentication.ejs', {data: data})
 	res.redirect('/posts');
 });
+
 //show all posts
 app.get('/posts', function(req, res){
 	db.all('SELECT * FROM daapPosts', function(err, data){
@@ -38,13 +43,24 @@ app.get('/posts', function(req, res){
 });
 
 //show individual post
-app.get('/post:id', function(req, res){
+app.get('/post/:id', function(req, res){
 	var id = req.params.id;
 	db.get('SELECT * FROM daapPosts WHERE id = ?', id, function(err, data){
 		var post_row = data;
-		console.log(post_row)
-		res.render('show.ejs', {thisPost: data})
+
+		db.all('SELECT * FROM postComments WHERE postid = ?', id, function(err, data){
+			var comments = data;
+
+			console.log(post_row);
+			console.log(comments);
+
+			res.render('show.ejs', {'post': post_row, 'comments': comments})
+		});
+
+		// res.render('show.ejs', {thisPost: data})
 	});
+
+
 });
 
 //server up new page to create a new post
@@ -53,11 +69,30 @@ app.get('/posts/new', function(req, res){
 });
 //create new post
 app.post('/posts', function(req, res){
-	console.log(req.body)
-	db.run("INSERT INTO daapPosts(name, year, semester, city, company, roommate, contact) VALUES (?,?,?,?,?,?,?)", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.company, req.body.roommate, req.body.contact, function(err){
+	console.log(req.body);
+
+	db.run("INSERT INTO daapPosts(name, year, semester, city, company, roommate, email) VALUES (?,?,?,?,?,?,?)", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.company, req.body.roommate, req.body.email, function(err){
 		if (err) throw err;
 		res.redirect('/posts');
 	});
+
+	var message = {
+		"text":"See new co-op postings....",
+		"subject":"Updates in your network",
+		"from_email":"admin@coopconnect.com",
+		"to": [{
+            "email": req.body.email,
+            "name": req.body.name,
+            "type": "to"
+        }],
+	}
+
+	mandrill_client.messages.send({"message": message, "async": false}, function(result){
+		console.log(result);
+	}, function(e) {
+		console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+	});
+
 });
 
 //sending user to 'edit/update a post' page
@@ -71,10 +106,20 @@ app.get('/post/:id/edit', function(req, res){
 	});
 });
 
+app.post('/post/:id/comment', function(req, res){
+	var id = req.params.id;
+	var comment = req.body.comment;
+
+	db.run("INSERT INTO postComments(comment, postid) VALUES (?,?)", comment, id, function(err){
+		if (err) throw err;
+		res.redirect('/post/' + id);
+	});
+});
+
 //update a post
 app.put('/post/:id', function(req, res){
 	//make changes to certain post 
-	db.run("UPDATE daapPosts SET name = ?, year = ?, semester = ?, city = ?, roommate = ?, contact = ?", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.roommate, req.body.contact, function(err){
+	db.run("UPDATE daapPosts SET name = ?, year = ?, semester = ?, city = ?, roommate = ?, email = ?", req.body.name, req.body.year, req.body.semester, req.body.city, req.body.roommate, req.body.email, function(err){
 		if (err) throw err;
 		rs.redirect('/post/' + parseInt(req.params.id))
 	});

@@ -1,0 +1,5 @@
+var config = {}
+
+config.mandrill_key = "MANDRILL API KEY HERE"
+
+module.exports = config;
