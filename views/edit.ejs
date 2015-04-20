@@ -6,15 +6,22 @@
 	<title></title>
 </head>
 <body>
-<h1>You can edit an article below:</h1>
-<form action ="/post/<%= daapPost.id %>?_method=PUT" method="POST">
+<h1>You can edit your co-op info below:</h1>
 
-			<input type="text" name="name" placeholder="name"/><br>
-			<input type="text" name="year" placeholder="grade"/><br>
-			<input type="text" name="semester" placeholder="semester"/><br>
-			<input type="text" name="city" placeholder="co-op city"/><br>
-			<input type="text" name="company" placeholder="company name"/><br>
-			<input type="text" name="roommate" placeholder="name"/><br>
+<form method="POST" action="/post/<%= data.id %>?_method=PUT" >
+
+			
+			<input type="text" name="name" placeholder="name"><br>
+			<input type="text" name="year" placeholder="grade"><br>
+			<input type="text" name="semester" placeholder="semester"><br>
+			<input type="text" name="city" placeholder="co-op city"><br>
+			<input type="text" name="company" placeholder="company name"><br>
+			  <h4> Are you interested in a roommate? </h4>
+			    <label>Yes</label>
+			    <input type="radio" name="yes" value="yes">
+			    <label>No</label>
+			    <input type="radio" name="no" value="no"> </br>
+			<input type="text" name="email" placeholder="email"><br>  
 
 <button>Submit</button>
 </form>

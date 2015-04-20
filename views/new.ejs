@@ -67,8 +67,8 @@
 			<div class="nav">
 				<ul>
 					<li><a href="/posts">home</a></li>
-					<li><a href="/post/:id/edit">new co-op</a></li>
-					<li><a href="/post/:id">update</a></li>
+					<li><a href="/post/new">new co-op</a></li>
+					<li><a href="/post/:id/edit">update</a></li>
 					<li><a href="/post/:id">delete</a></li>
 				</ul>	
 
@@ -76,31 +76,28 @@
 		</div>
 	</div>
 	<div class="content">
-		<p>New User:</p>
+		<p>New Co-Op:</p>
 
 	
-	
 
 
+			
+			<form method="POST" action="/post/new">
 
-			<form>
-			<form method="GET" action="http://localhost:3000/new">
-
-			<input type="text" name="name" placeholder="name"/><br>
-			<input type="text" name="year" placeholder="grade"/><br>
-			<input type="text" name="semester" placeholder="semester"/><br>
-			<input type="text" name="city" placeholder="co-op city"/><br>
-			<input type="text" name="company" placeholder="company name"/><br>
-			<input type="text" name="roommate" placeholder="name"/><br>
+			<input type="text" name="name" placeholder="name"><br>
+			<input type="text" name="year" placeholder="grade"><br>
+			<input type="text" name="semester" placeholder="semester"><br>
+			<input type="text" name="city" placeholder="co-op city"><br>
+			<input type="text" name="company" placeholder="company name"><br>
 			  <h4> Are you interested in a roommate? </h4>
 			    <label>Yes</label>
-			    <input type="radio" name="yes" value="yes">
+			    <input type="radio" name="roommate" value="yes">
 			    <label>No</label>
-			    <input type="radio" name="no" value="no"> </br>
-			<input type="text" name="email" placeholder="email"/><br>    
+			    <input type="radio" name="roommate" value="no"> </br>
+			<input type="text" name="email" placeholder="email"><br>    
 
-			<input type="submit" value="Submit" />
-	</form>
+			<button>Create Post</button><br><br>
+	</form><br><br>
 	</div>
 </body>
 </html>
